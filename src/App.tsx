@@ -1,8 +1,11 @@
+import { Route, Routes } from 'react-router-dom'
+import { Main } from '@pages'
+
 const App = () => {
   return (
-    <div className="w-full h-screen flex justify-center items-center text-9xl font-semibold">
-      <h1>Hello World</h1>
-    </div>
+    <Routes>
+      <Route path="/" element={<Main />} />
+    </Routes>
   )
 }
 
