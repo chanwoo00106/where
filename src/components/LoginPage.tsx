@@ -2,37 +2,39 @@ import { FcGoogle } from 'react-icons/fc'
 import {
   signInWithRedirect,
   GoogleAuthProvider,
-  getRedirectResult
+  getRedirectResult,
+  deleteUser,
+  getAuth
 } from 'firebase/auth'
 import { app } from '@common'
+import { useNavigate } from 'react-router-dom'
 
 const LoginPage = () => {
+  const navigate = useNavigate()
+  const auth = getAuth(app)
+
   const onLogin = async () => {
     const provider = new GoogleAuthProvider()
 
-    await signInWithRedirect(app.auth, provider)
+    provider.addScope('https://www.googleapis.com/auth/userinfo.profile')
+
+    await signInWithRedirect(auth, provider)
   }
 
-  getRedirectResult(app.auth)
-    .then(result => {
-      if (!result) return
+  getRedirectResult(auth).then(result => {
+    if (!result) return
+    if (!result.user.email?.includes('@gsm.hs.kr') && auth.currentUser) {
+      deleteUser(auth.currentUser)
+      return
+    }
 
-      // This gives you a Google Access Token. You can use it to access Google APIs.
-      const credential = GoogleAuthProvider.credentialFromResult(result)
-      const token = credential?.accessToken
+    GoogleAuthProvider.credentialFromResult(result)
+  })
 
-      // The signed-in user info.
-      const user = result?.user
-
-      console.log(user)
-      console.log(token)
-    })
-    .catch(error => {
-      // Handle Errors here.
-      const errorCode = error.code
-      const errorMessage = error.message
-      console.log(errorCode, errorMessage)
-    })
+  auth.onAuthStateChanged(user => {
+    if (!user) return
+    navigate('/')
+  })
 
   return (
     <div className="h-screen w-full flex justify-center items-center bg-[#EBECEF] px-20">
