@@ -7,16 +7,12 @@ import {
   getAuth
 } from 'firebase/auth'
 import { app } from '@common'
-import { useNavigate } from 'react-router-dom'
 
 const LoginPage = () => {
-  const navigate = useNavigate()
   const auth = getAuth(app)
 
   const onLogin = async () => {
     const provider = new GoogleAuthProvider()
-
-    provider.addScope('https://www.googleapis.com/auth/userinfo.profile')
 
     await signInWithRedirect(auth, provider)
   }
@@ -27,13 +23,6 @@ const LoginPage = () => {
       deleteUser(auth.currentUser)
       return
     }
-
-    GoogleAuthProvider.credentialFromResult(result)
-  })
-
-  auth.onAuthStateChanged(user => {
-    if (!user) return
-    navigate('/')
   })
 
   return (
