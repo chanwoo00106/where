@@ -1,13 +1,8 @@
-import { app } from '@common'
-import { getAuth } from 'firebase/auth'
 import { AiOutlineArrowRight } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
 
 const MainContent = () => {
   const navigate = useNavigate()
-  const auth = getAuth(app)
-
-  console.log(auth)
 
   return (
     <div className="h-screen flex items-center px-20">
