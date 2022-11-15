@@ -9,7 +9,8 @@ if (
   !env.VITE_AUTH_DOMAIN ||
   !env.VITE_MEASUREMENT_ID ||
   !env.VITE_STORAGE_BUCKET ||
-  !env.VITE_MESSAGING_SENDER_ID
+  !env.VITE_MESSAGING_SENDER_ID ||
+  !env.VITE_CLIENT_ID
 )
   new Error('Not Found env')
 
