@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+import { checkStudent } from '@common'
 
 export interface UserState {
   sub: string | null
@@ -30,9 +31,7 @@ export const userSlice = createSlice({
     setUser: (state, action: PayloadAction<setUserType>) => {
       state = {
         ...action.payload,
-        role: /s\d{5}@gsm.hs.kr/g.test(action.payload.email)
-          ? 'student'
-          : 'teacher'
+        role: checkStudent(action.payload.email)
       }
     }
   }

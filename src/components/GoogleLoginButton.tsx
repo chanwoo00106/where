@@ -1,4 +1,5 @@
-import { env, storage, toastOption } from '@common'
+import { env, storage, toastOption, app, checkStudent } from '@common'
+import { doc, setDoc } from 'firebase/firestore'
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google'
 import jwtDecode from 'jwt-decode'
 import { useDispatch } from 'react-redux'
@@ -15,13 +16,22 @@ const GoogleLoginButton = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const onSuccess = (res: CredentialResponse) => {
+  const onSuccess = async (res: CredentialResponse) => {
     if (!res.credential) return toast.warn('로그인 실패')
 
     const { name, email, picture, sub } = jwtDecode<TokenIdType>(res.credential)
 
     if (!email.includes('@gsm.hs.kr'))
       return toast.warn('gsm 계정으로 로그인 해주세요', toastOption)
+
+    const users = doc(app.db, 'users', sub)
+    await setDoc(users, {
+      email,
+      picture,
+      name,
+      role: checkStudent(email),
+      token: res.credential
+    })
 
     storage.saveStorage('token', res.credential)
 

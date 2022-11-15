@@ -1,4 +1,5 @@
 import { initializeApp } from 'firebase/app'
+import { getFirestore } from 'firebase/firestore'
 import { env } from '@common'
 
 const firebaseConfig = {
@@ -13,4 +14,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig)
 
-export default app
+const db = getFirestore(app)
+
+export default { db }
