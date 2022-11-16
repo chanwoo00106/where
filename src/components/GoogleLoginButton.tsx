@@ -24,8 +24,8 @@ const GoogleLoginButton = () => {
     if (!email.includes('@gsm.hs.kr'))
       return toast.warn('gsm 계정으로 로그인 해주세요', toastOption)
 
-    const users = doc(app.db, 'users', sub)
-    await setDoc(users, {
+    const user = doc(app.db, 'users', sub)
+    await setDoc(user, {
       email,
       picture,
       name,
