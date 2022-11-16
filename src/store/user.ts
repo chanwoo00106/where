@@ -1,20 +1,25 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { checkStudent } from '@common'
 
 export interface UserState {
-  sub: string | null
-  email: string | null
-  picture: string | null
+  sub?: string
+  email?: string
+  picture?: string
   name: string
   role?: 'student' | 'teacher'
+  grade?: number
+  class?: number
+  num?: number
 }
 
 const initialState: UserState = {
-  sub: null,
-  email: null,
-  picture: null,
-  name: ''
+  sub: undefined,
+  email: undefined,
+  picture: undefined,
+  name: '',
+  grade: undefined,
+  class: undefined,
+  num: undefined
 }
 
 interface setUserType {
@@ -22,6 +27,10 @@ interface setUserType {
   email: string
   picture: string
   name: string
+  role: 'student' | 'teacher'
+  grade?: number
+  class?: number
+  num?: number
 }
 
 export const userSlice = createSlice({
@@ -31,13 +40,23 @@ export const userSlice = createSlice({
     setUser: (state, action: PayloadAction<setUserType>) => {
       return {
         ...state,
-        ...action.payload,
-        role: checkStudent(action.payload.email)
+        ...action.payload
+      }
+    },
+    clearUser: () => {
+      return {
+        sub: undefined,
+        email: undefined,
+        picture: undefined,
+        name: '',
+        grade: undefined,
+        class: undefined,
+        num: undefined
       }
     }
   }
 })
 
-export const { setUser } = userSlice.actions
+export const { setUser, clearUser } = userSlice.actions
 
 export default userSlice.reducer

@@ -5,6 +5,7 @@ import jwtDecode from 'jwt-decode'
 import { useDispatch } from 'react-redux'
 import { setUser } from '@store/user'
 import { toast, ToastContainer } from 'react-toastify'
+import { students } from '@lib'
 
 import type { CredentialResponse } from '@react-oauth/google'
 import type { TokenIdType } from '@types'
@@ -24,18 +25,32 @@ const GoogleLoginButton = () => {
     if (!email.includes('@gsm.hs.kr'))
       return toast.warn('gsm 계정으로 로그인 해주세요', toastOption)
 
+    const student = students.find(stu => {
+      return stu.email === email
+    })
+
     const user = doc(app.db, 'users', sub)
     await setDoc(user, {
+      ...student,
       email,
       picture,
-      name,
+      name: student?.name ?? name,
       role: checkStudent(email),
       token: res.credential
     })
 
     storage.saveStorage('token', res.credential)
 
-    dispatch(setUser({ email, picture, name, sub }))
+    dispatch(
+      setUser({
+        ...student,
+        sub,
+        email,
+        picture,
+        name: student?.name ?? name,
+        role: checkStudent(email)
+      })
+    )
     toast.success('로그인 성공', toastOption)
     navigate('/')
   }
