@@ -1,26 +1,22 @@
-import { AiOutlineArrowRight } from 'react-icons/ai'
+import { SlArrowRight } from 'react-icons/sl'
 import { useNavigate } from 'react-router-dom'
 
 const MainContent = () => {
   const navigate = useNavigate()
 
   return (
-    <div className="h-screen flex items-center px-20">
-      <div className="flex-1">
-        <h1 className="text-9xl font-thin text-gray-800">Where</h1>
-        <p className="px-5 my-10 text-xl text-gray-400">
+    <div className="h-screen flex items-center px-32 bg-[url('./background.jpg')] object-cover object-center bg-no-repeat bg-cover">
+      <div className="">
+        <h1 className="text-5xl text-white font-semibold">Where.</h1>
+        <p className="mt-1 text-lg font-medium text-white">
           자습위치를 쉽게 관리하도록 만들어진 서비스입니다.
         </p>
         <button
           onClick={() => navigate('/login')}
-          className="text-gray-700 px-5 py-3 flex items-center space-x-1 rounded-full hover:bg-red-800 hover:text-white transition"
+          className="mt-12 font-light text-white border border-white pl-5 pr-3 py-2.5 flex items-center gap-2 rounded-full hover:bg-white hover:text-gray-700 transition"
         >
-          로그인하기 <AiOutlineArrowRight />
+          로그인하기 <SlArrowRight />
         </button>
-      </div>
-
-      <div className="flex-1">
-        <img src="./checklist.png" alt="checklist" />
       </div>
     </div>
   )

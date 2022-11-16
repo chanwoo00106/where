@@ -1,9 +1,8 @@
-import { Header, MainContent } from '@components'
+import { MainContent } from '@components'
 
 const Main = () => {
   return (
     <div className="bg-[#EBECEF]">
-      <Header />
       <MainContent />
     </div>
   )

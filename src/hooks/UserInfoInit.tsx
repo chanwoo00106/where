@@ -28,7 +28,29 @@ const UserInfoInit = () => {
       const result = await getDoc(userDoc)
       if (email !== result.get('email')) return
 
-      dispatch(setUser({ name, email, picture, sub }))
+      if (result.get('role') === 'student')
+        dispatch(
+          setUser({
+            name,
+            email,
+            picture,
+            sub,
+            role: 'student',
+            grade: result.get('grade'),
+            class: result.get('class'),
+            num: result.get('num')
+          })
+        )
+      else
+        dispatch(
+          setUser({
+            name,
+            email,
+            picture,
+            sub,
+            role: 'teacher'
+          })
+        )
     })()
   }, [])
 }
