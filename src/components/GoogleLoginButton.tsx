@@ -58,7 +58,12 @@ const GoogleLoginButton = () => {
   return (
     <>
       <GoogleOAuthProvider clientId={env.VITE_CLIENT_ID}>
-        <GoogleLogin onSuccess={onSuccess} theme="outline" width="400px" />
+        <GoogleLogin
+          onSuccess={onSuccess}
+          theme="outline"
+          width="400px"
+          ux_mode="redirect"
+        />
       </GoogleOAuthProvider>
       <ToastContainer />
     </>

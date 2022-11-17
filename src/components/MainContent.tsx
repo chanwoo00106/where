@@ -5,7 +5,7 @@ const MainContent = () => {
   const navigate = useNavigate()
 
   return (
-    <div className="h-screen flex items-center px-32 bg-[url('./background.jpg')] object-cover object-center bg-no-repeat bg-cover">
+    <div className="h-screen flex items-center px-32 ">
       <div className="">
         <h1 className="text-5xl text-white font-semibold">Where.</h1>
         <p className="mt-1 text-lg font-medium text-white">

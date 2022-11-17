@@ -4,7 +4,7 @@ import { configureStore } from '@reduxjs/toolkit'
 
 export interface RootStates {
   user: UserState
-        }
+}
 
 const store = configureStore({
   reducer: {
