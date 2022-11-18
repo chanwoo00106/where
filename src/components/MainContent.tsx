@@ -1,13 +1,11 @@
-import { SlArrowRight } from 'react-icons/sl'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-
-import type { RootStates } from '@store'
 import UserInfo from './UserInfo'
 import StudyPosition from './StudyPosition'
+import GoogleLoginButton from './GoogleLoginButton'
+
+import type { RootStates } from '@store'
 
 const MainContent = () => {
-  const navigate = useNavigate()
   const { user } = useSelector((state: RootStates) => ({
     user: state.user
   }))
@@ -28,12 +26,7 @@ const MainContent = () => {
             <StudyPosition />
           </div>
         ) : (
-          <button
-            onClick={() => navigate('/login')}
-            className="mt-12 font-light text-white border border-white pl-5 pr-3 py-2.5 flex items-center gap-2 rounded-full hover:bg-white hover:text-gray-700 transition"
-          >
-            로그인하기 <SlArrowRight />
-          </button>
+          <GoogleLoginButton />
         )}
       </div>
     </div>

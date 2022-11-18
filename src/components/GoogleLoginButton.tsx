@@ -61,8 +61,10 @@ const GoogleLoginButton = () => {
         <GoogleLogin
           onSuccess={onSuccess}
           theme="outline"
-          width="400px"
-          ux_mode="redirect"
+          type="standard"
+          shape="pill"
+          size="large"
+          width="200"
         />
       </GoogleOAuthProvider>
       <ToastContainer />

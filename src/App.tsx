@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
-import { Main, Login } from '@pages'
+import { Main } from '@pages'
 import { UserInfoInit } from '@hooks'
 
 const App = () => {
@@ -8,7 +8,6 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Main />} />
-      <Route path="/login" element={<Login />} />
     </Routes>
   )
 }
