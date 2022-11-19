@@ -34,10 +34,10 @@ const Add = () => {
     )
     setDoc(self_study, {
       ...form,
-      isChecked: false
+      isChecked: null
     })
 
-    dispatch(setStudy({ ...form, date: date.toString() }))
+    dispatch(setStudy({ ...form, isChecked: null, date: date.toString() }))
 
     navigate('/')
   }

@@ -4,13 +4,14 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 export interface SelfStudyState {
   pos: string
   excuse: string
-  isChecked?: boolean
+  isChecked: boolean | null
   date?: string
 }
 
 const initialState: SelfStudyState = {
   pos: '',
-  excuse: ''
+  excuse: '',
+  isChecked: null
 }
 
 export const selfStudySlice = createSlice({
