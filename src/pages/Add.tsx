@@ -3,9 +3,10 @@ import { app } from '@common'
 import { useForm } from 'react-hook-form'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import type { RootStates } from '@store'
+import { setStudy } from '@store/selfStudy'
 
 interface Inputs {
   pos: string
@@ -14,6 +15,7 @@ interface Inputs {
 
 const Add = () => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const { register, handleSubmit } = useForm<Inputs>()
   const { user } = useSelector((state: RootStates) => ({
     user: state.user
@@ -34,6 +36,8 @@ const Add = () => {
       ...form,
       isChecked: false
     })
+
+    dispatch(setStudy({ ...form, date }))
 
     navigate('/')
   }
