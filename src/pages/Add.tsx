@@ -37,7 +37,7 @@ const Add = () => {
       isChecked: false
     })
 
-    dispatch(setStudy({ ...form, date }))
+    dispatch(setStudy({ ...form, date: date.toString() }))
 
     navigate('/')
   }
