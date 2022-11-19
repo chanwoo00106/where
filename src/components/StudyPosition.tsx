@@ -1,4 +1,8 @@
+import { useNavigate } from 'react-router-dom'
+
 const StudyPosition = () => {
+  const navigate = useNavigate()
+
   return (
     <div className="bg-[#E5EEEE] max-w-3xl px-10 py-8 rounded-xl flex justify-between items-center">
       <div>
@@ -11,7 +15,12 @@ const StudyPosition = () => {
       </div>
 
       <div>
-        <button className="text-[#528273] font-semibold">등록</button>
+        <button
+          onClick={() => navigate('/add')}
+          className="text-[#528273] font-semibold"
+        >
+          등록
+        </button>
       </div>
     </div>
   )
