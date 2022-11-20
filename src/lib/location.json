@@ -1,0 +1,7 @@
+[
+  { "id": 1, "location": "2층 홈베이스", "description": "본관 2층" },
+  { "id": 2, "location": "3층 홈베이스", "description": "본관 3층" },
+  { "id": 3, "location": "4층 홈베이스", "description": "본관 4층" },
+  { "id": 4, "location": "도서실", "description": "금봉관 3층" },
+  { "id": 5, "location": "데이터베이스실", "description": "생활관 1층" }
+]

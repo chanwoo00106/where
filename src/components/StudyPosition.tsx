@@ -29,8 +29,8 @@ const StudyPosition = () => {
           onClick={() => navigate('/add')}
           className="text-[#528273] font-semibold"
         >
-          {selfStudy.isChecked === undefined && !selfStudy.pos && '등록'}
-          {selfStudy.isChecked === undefined && selfStudy.pos && '변경'}
+          {selfStudy.isChecked === null && !selfStudy.pos && '등록'}
+          {selfStudy.isChecked === null && selfStudy.pos && '변경'}
           {selfStudy.isChecked === false && '변경'}
         </button>
       </div>

@@ -4,9 +4,10 @@ import { useForm } from 'react-hook-form'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { setStudy } from '@store/selfStudy'
+import { location } from '@lib'
 
 import type { RootStates } from '@store'
-import { setStudy } from '@store/selfStudy'
 
 interface Inputs {
   pos: string
@@ -16,16 +17,17 @@ interface Inputs {
 const Add = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const { register, handleSubmit } = useForm<Inputs>()
+  const { register, handleSubmit, setValue, watch } = useForm<Inputs>()
   const { user } = useSelector((state: RootStates) => ({
     user: state.user
   }))
 
   const onCancel = () => navigate(-1)
 
+  const onChoice = (location: string) => setValue('pos', location)
+
   const onSubmit = (form: Inputs) => {
     const date = new Date()
-    console.log(form)
 
     const self_study = doc(
       app.db,
@@ -64,7 +66,7 @@ const Add = () => {
         </button>
       </div>
 
-      <div className="max-w-3xl w-[80%] mb-24">
+      <div className="max-w-3xl w-[80%] h-80">
         <h2 className="text-xl font-normal mb-5">자습 위치 검색</h2>
         <div className="flex gap-2 items-center bg-[#8B8E8E] px-5 py-4 rounded-3xl shadow-lg shadow-white/20">
           <AiOutlineSearch color="4E4E55" size={25} />
@@ -73,6 +75,32 @@ const Add = () => {
             className="text-base bg-[#8B8E8E] placeholder:text-[#4e4e55] outline-none text-[#4E4E55] w-full"
             placeholder="어디서 자습을 하실건가요?"
           />
+        </div>
+
+        <div>
+          {location
+            .filter(i => {
+              if (watch('pos') === '') return false
+              if (i.location.includes(watch('pos'))) return true
+            })
+            .slice(0, 2)
+            .map(i => (
+              <div
+                className="flex justify-between px-10 py-5 border-b border-[#333333]"
+                key={i.id}
+              >
+                <div className="flex space-x-10">
+                  <p>{i.location}</p>
+                  <p>{i.description}</p>
+                </div>
+                <button
+                  onClick={() => onChoice(i.location)}
+                  className="text-[#2BA77A]"
+                >
+                  선택
+                </button>
+              </div>
+            ))}
         </div>
       </div>
 
