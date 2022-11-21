@@ -1,5 +1,5 @@
 const SelfStudyList = () => {
-  return <div>SelfStudyList</div>
+  return <div className="col-span-3">SelfStudyList</div>
 }
 
 export default SelfStudyList
