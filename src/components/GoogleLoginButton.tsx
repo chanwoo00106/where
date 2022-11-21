@@ -52,7 +52,9 @@ const GoogleLoginButton = () => {
       })
     )
     toast.success('로그인 성공', toastOption)
-    navigate('/')
+
+    if (checkStudent(email) === 'student') navigate('/')
+    else navigate('/admin')
   }
 
   return (
