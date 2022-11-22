@@ -1,4 +1,4 @@
-import { doc, setDoc } from 'firebase/firestore'
+import { doc, setDoc, Timestamp } from 'firebase/firestore'
 import { app } from '@common'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
@@ -36,7 +36,9 @@ const Add = () => {
     )
     setDoc(self_study, {
       ...form,
-      isChecked: null
+      isChecked: null,
+      date: Timestamp.now(),
+      user: doc(app.db, `users/${user.sub}`)
     })
 
     dispatch(setStudy({ ...form, isChecked: null, date: date.toString() }))
