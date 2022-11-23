@@ -1,6 +1,7 @@
 import { app } from '@common'
 import { collection, getDocs, query, where } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
+import { User } from '@components'
 
 import type { DocumentData, QuerySnapshot } from 'firebase/firestore'
 
@@ -23,7 +24,13 @@ const UserList = () => {
   return (
     <div>
       {data?.docs.map(i => (
-        <div key={i.id}>{i.get('pos')}</div>
+        <User
+          key={i.id}
+          isChecked={i.get('isChecked')}
+          excuse={i.get('excuse')}
+          pos={i.get('pos')}
+          user={i.get('user')}
+        />
       ))}
     </div>
   )
