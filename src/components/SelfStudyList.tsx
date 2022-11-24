@@ -20,7 +20,7 @@ const SelfStudyList = () => {
         </select>
       </div>
       <Searchbar placeholder="이름 입력" />
-      <UserList />
+      <UserList class_={class_} />
     </div>
   )
 }

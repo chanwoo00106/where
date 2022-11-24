@@ -38,7 +38,9 @@ const Add = () => {
       ...form,
       isChecked: null,
       date: Timestamp.now(),
-      user: doc(app.db, `users/${user.sub}`)
+      user: doc(app.db, `users/${user.sub}`),
+      class: user.class,
+      grade: user.grade
     })
 
     dispatch(setStudy({ ...form, isChecked: null, date: date.toString() }))
