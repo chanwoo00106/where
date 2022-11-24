@@ -45,7 +45,7 @@ const StudyPosition = () => {
 
           {selfStudy.isChecked === true && '허가되었습니다.'}
 
-          {selfStudy.isChecked == null && '대기중입니다'}
+          {selfStudy.isChecked == null && selfStudy.pos && '대기중입니다'}
         </p>
       </div>
     </div>

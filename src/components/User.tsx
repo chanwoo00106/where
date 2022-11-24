@@ -4,7 +4,9 @@ import { useEffect, useState } from 'react'
 
 import type { DocumentReference, Timestamp } from 'firebase/firestore'
 import type { UserDocType } from '@types'
-import { toast } from 'react-toastify'
+import { toast, ToastContainer } from 'react-toastify'
+
+import 'react-toastify/dist/ReactToastify.css'
 
 interface Props {
   excuse: string
@@ -12,9 +14,11 @@ interface Props {
   pos: string
   user: DocumentReference
   date: Timestamp
+  class_: number
+  grade: number
 }
 
-const User = ({ excuse, isChecked, pos, user, date }: Props) => {
+const User = ({ excuse, isChecked, pos, user, date, class_, grade }: Props) => {
   const [userDoc, setUserDoc] = useState<UserDocType>()
 
   useEffect(() => {
@@ -45,7 +49,9 @@ const User = ({ excuse, isChecked, pos, user, date }: Props) => {
         pos,
         user,
         date,
-        isChecked
+        isChecked,
+        class: class_,
+        grade
       }
     )
 
@@ -53,50 +59,55 @@ const User = ({ excuse, isChecked, pos, user, date }: Props) => {
   }
 
   return (
-    <div className="bg-[#E5EEEE] text-black flex items-center rounded-2xl py-6 px-4 justify-between">
-      <div className="flex">
-        <img
-          className="h-14 rounded-full mr-5"
-          src={userDoc?.picture}
-          alt="user image"
-        />
+    <>
+      <div className="bg-[#E5EEEE] text-black flex items-center rounded-2xl py-6 px-4 justify-between">
+        <div className="flex">
+          <img
+            className="h-14 rounded-full mr-5"
+            src={userDoc?.picture}
+            alt="user image"
+          />
+
+          <div>
+            <h2>{userDoc?.name}</h2>
+            <p>
+              {userDoc?.grade}학년 {userDoc?.class}반 {userDoc?.num}번
+            </p>
+          </div>
+        </div>
 
         <div>
-          <h2>{userDoc?.name}</h2>
-          <p>
-            {userDoc?.grade}학년 {userDoc?.class}반 {userDoc?.num}번
-          </p>
+          <h4>{pos}</h4>
+          <p>{excuse}</p>
+        </div>
+
+        <div className="flex items-center gap-5 text-[#528273]">
+          {isChecked === true && (
+            <button onClick={() => changeIsChecked(null, '취소')}>
+              허가 취소
+            </button>
+          )}
+
+          {isChecked === null && (
+            <>
+              <button onClick={() => changeIsChecked(true, '허가')}>
+                허가
+              </button>
+              <button onClick={() => changeIsChecked(false, '수정 요청')}>
+                수정 요청
+              </button>
+            </>
+          )}
+
+          {isChecked === false && (
+            <button onClick={() => changeIsChecked(null, '취소')}>
+              수정요청 취소
+            </button>
+          )}
         </div>
       </div>
-
-      <div>
-        <h4>{pos}</h4>
-        <p>{excuse}</p>
-      </div>
-
-      <div className="flex items-center gap-5 text-[#528273]">
-        {isChecked === true && (
-          <button onClick={() => changeIsChecked(null, '취소')}>
-            허가 취소
-          </button>
-        )}
-
-        {isChecked === null && (
-          <>
-            <button onClick={() => changeIsChecked(true, '허가')}>허가</button>
-            <button onClick={() => changeIsChecked(false, '수정 요청')}>
-              수정 요청
-            </button>
-          </>
-        )}
-
-        {isChecked === false && (
-          <button onClick={() => changeIsChecked(null, '취소')}>
-            수정요청 취소
-          </button>
-        )}
-      </div>
-    </div>
+      <ToastContainer />
+    </>
   )
 }
 

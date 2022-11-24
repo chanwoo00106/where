@@ -42,6 +42,8 @@ const UserList = ({ class_ }: Props) => {
           pos={i.get('pos')}
           user={i.get('user')}
           date={i.get('date')}
+          class_={i.get('class')}
+          grade={i.get('grade')}
         />
       ))}
     </div>
