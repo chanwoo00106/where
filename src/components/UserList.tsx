@@ -1,5 +1,5 @@
 import { app } from '@common'
-import { collection, getDocs, query, where } from 'firebase/firestore'
+import { collection, query, where, onSnapshot } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
 import { User } from '@components'
 
@@ -16,13 +16,13 @@ const UserList = () => {
         where('date', '>=', date)
       )
 
-      const a = await getDocs(q)
-
-      setData(a)
+      onSnapshot(q, querySnapshot => {
+        setData(querySnapshot)
+      })
     })()
   }, [])
   return (
-    <div>
+    <div className="mt-10">
       {data?.docs.map(i => (
         <User
           key={i.id}
@@ -30,6 +30,7 @@ const UserList = () => {
           excuse={i.get('excuse')}
           pos={i.get('pos')}
           user={i.get('user')}
+          date={i.get('date')}
         />
       ))}
     </div>
