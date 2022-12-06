@@ -3,7 +3,9 @@
   "testEnvironment": "jsdom",
   "moduleNameMapper": {
     "\\.(css|less|svg)$": "identity-obj-proxy",
-    "@store/(.*)": "<rootDir>/src/store/$1"
+    "^@store/(.*)$": "<rootDir>/src/store/$1",
+    "^@components/(.*)$": "<rootDir>/src/components/$1",
+    "^@common/(.*)$": "<rootDir>/src/common/$1"
   },
   "setupFilesAfterEnv": ["<rootDir>/src/test/setup.ts"],
   "transform": {
