@@ -1,6 +1,6 @@
 import type { ENV } from '@types'
 
-const env: Record<ENV, string> = import.meta.env as Record<ENV | string, string>
+const env: Record<ENV, string> = process.env as Record<ENV | string, string>
 
 if (
   !env.VITE_API_KEY ||
